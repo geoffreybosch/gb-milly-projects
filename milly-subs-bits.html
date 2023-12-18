@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text File Reader</title>
+    <style>
+        body {
+            background-color: #e0ffff;
+            /* Light blue background */
+            font-family: sans-serif;
+        }
+
+        #content {
+            padding: 20px;
+            color: pink;
+            /* Pink text */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <p id="file-data"></p>
+    </div>
+
+    <script>
+        // Function to read the text file
+        function readFile(filePath) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", filePath, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        document.getElementById("file-data").innerText = xhr.responseText;
+                    } else {
+                        console.error(`Error reading file: ${filePath}`);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Read the content of mydata.txt when the page loads
+        window.onload = function () {
+            readFile("a.txt");
+        };
+    </script>
+</body>
+
+</html>
